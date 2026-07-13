@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 network_prefix="$1"
+responses=0
 
 if [ -z "$network_prefix" ]; then
     echo "Usage: $0 <network-prefix>"
@@ -13,5 +14,7 @@ for num in {1..254}; do
 
     if ping -c 1 -W 1 "$ip" > /dev/null 2>&1; then
         echo "$ip is reachable"
+        responses=$((responses + 1))
     fi
 done
+echo "$responses ip respond"
